@@ -1,26 +1,24 @@
 class Solution {
 public:
-    
-    static constexpr int K = 1000;
-    
-    
     bool uniqueOccurrences(vector<int>& arr) {
         
-        vector<int> count(2*K + 1);
+        map<int,int> mpp;
         
-        
-        for (int num: arr){
-            count[num + K]++;
+        for(auto i: arr){
+            mpp[i]++;
         }
         
-        sort(count.begin(), count.end());
+        set<int> set1;
         
-        for (int i=0; i<2 * K; i++){
-            if(count[i] && count[i] == count[i+1]){
+        for(auto it: mpp){
+            if(set1.count(it.second) > 0){
                 return false;
+            }
+            else{
+                set1.insert(it.second);
             }
         }
         
         return true;
-        }
+    }
 };
